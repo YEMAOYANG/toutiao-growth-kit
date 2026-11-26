@@ -48,7 +48,7 @@ node scripts/interact/src/cli.js --keyword "打游戏460" --dry-run   # 演练
 
 ### 3. 发布文章
 
-先复制 `assets/article-package.example.json` 改成自己的发布包，填好标题、正文、封面、声明：
+先复制 `templates/article-package.example.json` 改成自己的发布包，填好标题、正文、封面、声明：
 
 ```bash
 python3 scripts/publish/publish.py --article ./my-article.json           # 观察模式

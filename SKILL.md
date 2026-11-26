@@ -1,10 +1,21 @@
 ---
 name: toutiao-growth-kit
-description: "今日头条内容运营全链路工具包：低频养号互动（点赞/评论/收藏/关注，内建合规与风控熔断）、图文自动发布（标题/正文/声明/插图/封面）、作品数据抓取与复盘分析、正文信息图生成。适用于需要运营头条号、做内容引流、按数据复盘调整选题的场景。当用户要求头条养号、自动发布头条文章、抓取头条作品数据、复盘头条内容表现或生成头条正文配图时使用。"
+display_name: 头条增长工具包
+display_name_en: Toutiao Growth Kit
+description: "今日头条内容运营全链路工具包：低频养号互动、图文自动发布、数据复盘、正文配图。当用户要求头条养号、发布头条文章、抓取头条作品数据、复盘头条内容或生成头条正文配图时使用。"
+description_zh: "头条内容运营一条龙：养号互动、图文发布、数据复盘、正文配图，内建合规与风控熔断。"
+description_en: "All-in-one Toutiao content operations: low-frequency engagement, article publishing, stats review, and infographics, with built-in compliance and risk circuit-breakers."
+examples_zh:
+  - "帮我用头条养号，搜索游戏延迟高的作品点赞评论"
+  - "把这篇稿子发布到头条，自动插图并勾选引用AI声明"
+  - "抓取头条作品数据，生成今天的复盘报告"
+examples_en:
+  - "Do a low-frequency engagement round on Toutiao for game-lag posts"
+  - "Publish this article to Toutiao with illustrations and AI declaration"
+  - "Fetch Toutiao post stats and generate today's review report"
 version: "1.0.0"
 author: "toutiao-growth-kit contributors"
 agent_created: true
-category: "productivity"
 allowed-tools: "Bash, Read, Write, Edit"
 ---
 
@@ -12,7 +23,7 @@ allowed-tools: "Bash, Read, Write, Edit"
 
 头条内容运营的一条龙工具：养号互动 → 内容发布 → 数据复盘 → 配图生成。所有选择器来自真实 DOM 侦察，所有动作内建低频限速与风控熔断。
 
-> **合规第一**：头条把自动化互动列为扣分项。本工具按低频、高质量设计，不追求量。遵守平台规则、不刷量、不诱导、不站外导流是使用者自己的责任。详见 `references/compliance.md`。
+> **合规第一**：头条把自动化互动列为扣分项。本工具按低频、高质量设计，不追求量。遵守平台规则、不刷量、不诱导、不站外导流是使用者自己的责任。详见 `@references/compliance.md`。
 
 ## 一、环境准备（首次必做）
 
@@ -60,7 +71,7 @@ node scripts/interact/src/cli.js --keyword "..." --comment "技术补充文案" 
 
 ### B. 图文发布
 
-发布包是一个 JSON（模板见 `assets/article-package.example.json`），字段：`title` / `content` / `cover` / `illustrations` / `compliance.declarations` 等。
+发布包是一个 JSON（模板见 `templates/article-package.example.json`），字段：`title` / `content` / `cover` / `illustrations` / `compliance.declarations` 等。
 
 ```bash
 # 先观察（不提交，检查填充是否正确）
@@ -106,7 +117,7 @@ python3 scripts/infographic/make_infographic.py
 - 发文：每天 1 篇，晚 19:30 前后；每 4 篇最多 1 篇带品牌词，其余纯干货。
 - 复盘：每日看数据异常，每周从选题/标题/封面/配图/时段归因调整。
 
-详细方法论见 `references/content-playbook.md`；踩坑记录见 `references/pitfalls.md`；DOM 选择器实测记录见 `references/dom-anchors.md`。
+详细方法论见 `@references/content-playbook.md`；踩坑记录见 `@references/pitfalls.md`；DOM 选择器实测记录见 `@references/dom-anchors.md`。
 
 ## 四、自定义
 
