@@ -27,7 +27,7 @@ function parseArgs(argv) {
 
 function usage() {
   console.log(`
-头条养号交互工具（toutiao-growth-kit）
+头条日常运营交互工具（toutiao-growth-kit）
 
 用法:
   node scripts/cli.js --keyword "<关键词>" [选项]
@@ -143,7 +143,7 @@ async function cmdInteract(args) {
 
         const block = await E.detectBlock(page);
         if (block.blocked) {
-          E.log(`  熔断：${block.type} (${block.keyword})`);
+          E.log(`  保护性中止：${block.type} (${block.keyword})`);
           rec.actions.push({ action: 'blocked', type: block.type });
           E.writeLog(rec);
           if (block.type === 'captcha' || block.type === 'rateLimit') {
@@ -200,7 +200,7 @@ async function cmdInteract(args) {
           if (act === 'comment') {
             const b2 = await E.detectBlock(page);
             if (b2.blocked) {
-              E.log(`  熔断：${b2.type}`);
+              E.log(`  保护性中止：${b2.type}`);
               rec.actions.push({ action: 'blocked', type: b2.type });
               break;
             }

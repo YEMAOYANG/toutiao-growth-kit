@@ -1,16 +1,16 @@
 # toutiao-growth-kit
 
-今日头条内容运营全链路工具包：**养号互动 → 图文发布 → 数据复盘 → 配图生成**，一个技能打通。
+今日头条内容运营全链路工具包：**合规互动 → 图文发布 → 数据复盘 → 配图生成**，一个技能打通。
 
-选择器来自真实 DOM 侦察（非抄旧仓库），所有动作内建低频限速与风控熔断。以 WorkBuddy Skill 形式分发，也可作为独立脚本库使用。
+选择器来自真实 DOM 侦察（非抄旧仓库），所有动作内建低频限速与异常保护。以 WorkBuddy Skill 形式分发，也可作为独立脚本库使用。
 
-> ⚠️ **合规声明**：头条把自动化互动列为扣分项。本工具按低频、高质量设计，不追求量。请遵守平台规则，不要用于刷量、诱导、站外导流。使用者自行承担合规责任，详见 [references/compliance.md](references/compliance.md)。
+> ⚠️ **合规声明**：头条把自动化互动列为扣分项。本工具按低频、高质量设计，不追求量。请遵守平台规则，不要用于高频批量操作、诱导、站外导流。使用者自行承担合规责任，详见 [references/compliance.md](references/compliance.md)。
 
 ## 功能
 
 | 模块 | 能力 |
 |---|---|
-| `scripts/cli.js` / `engine.js` 等 | 按关键词搜站内作品，点赞/评论/收藏/关注，合规校验 + 风控熔断 + 落地验证 + 台账 |
+| `scripts/cli.js` / `engine.js` 等 | 按关键词搜站内作品，点赞/评论/收藏/关注，合规校验 + 异常保护 + 落地验证 + 台账 |
 | `scripts/publish.py` | 发布包驱动的图文发布：标题/正文/声明/插图/封面自动填充，发布后核实落地 |
 | `scripts/fetch_stats.js` / `analyze.py` | 抓后台作品数据，日报/周报分析，数据驱动调整建议 |
 | `scripts/make_infographic.py` | Pillow 生成中文信息图，配正文使用 |
@@ -28,7 +28,7 @@ npm install                 # Node: playwright
 pip install playwright Pillow
 ```
 
-需要系统 Chrome（脚本用 `channel: 'chrome'`，指纹更接近真实用户）。
+需要系统 Chrome（脚本用 `channel: 'chrome'`，兼容系统浏览器）。
 
 ## 快速开始
 
@@ -39,7 +39,7 @@ node scripts/cli.js --login
 node scripts/cli.js --check    # 确认 ready: true
 ```
 
-### 2. 养号互动
+### 2. 合规互动
 
 ```bash
 node scripts/cli.js --keyword "游戏延迟高怎么办" --max 3 --do like,comment

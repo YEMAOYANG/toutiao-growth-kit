@@ -2,11 +2,11 @@
 name: toutiao-growth-kit
 display_name: 头条增长工具包
 display_name_en: Toutiao Growth Kit
-description: "今日头条内容运营全链路工具包：低频养号互动、图文自动发布、数据复盘、正文配图。当用户要求头条养号、发布头条文章、抓取头条作品数据、复盘头条内容或生成头条正文配图时使用。"
-description_zh: "头条内容运营一条龙：养号互动、图文发布、数据复盘、正文配图，内建合规与风控熔断。"
+description: "今日头条内容运营全链路工具包：低频合规互动、图文自动发布、数据复盘、正文配图。当用户要求头条日常运营、发布头条文章、抓取头条作品数据、复盘头条内容或生成头条正文配图时使用。"
+description_zh: "头条内容运营一条龙：合规互动、图文发布、数据复盘、正文配图，内建合规与异常保护。"
 description_en: "All-in-one Toutiao content operations: low-frequency engagement, article publishing, stats review, and infographics, with built-in compliance and risk circuit-breakers."
 examples_zh:
-  - "帮我用头条养号，搜索游戏延迟高的作品点赞评论"
+  - "帮我用头条日常运营，搜索游戏延迟高的作品点赞评论"
   - "把这篇稿子发布到头条，自动插图并勾选引用AI声明"
   - "抓取头条作品数据，生成今天的复盘报告"
 examples_en:
@@ -21,9 +21,9 @@ allowed-tools: "Bash, Read, Write, Edit"
 
 # 今日头条增长工具包
 
-头条内容运营的一条龙工具：养号互动 → 内容发布 → 数据复盘 → 配图生成。所有选择器来自真实 DOM 侦察，所有动作内建低频限速与风控熔断。
+头条内容运营的一条龙工具：合规互动 → 内容发布 → 数据复盘 → 配图生成。所有选择器来自真实 DOM 侦察，所有动作内建低频限速与异常保护。
 
-> **合规第一**：头条把自动化互动列为扣分项。本工具按低频、高质量设计，不追求量。遵守平台规则、不刷量、不诱导、不站外导流是使用者自己的责任。详见 `@references/compliance.md`。
+> **合规第一**：头条把自动化互动列为扣分项。本工具按低频、高质量设计，不追求量。遵守平台规则、不高频批量操作、不诱导、不站外导流是使用者自己的责任。详见 `@references/compliance.md`。
 
 ## 一、环境准备（首次必做）
 
@@ -49,7 +49,7 @@ allowed-tools: "Bash, Read, Write, Edit"
 
 ## 二、四大能力
 
-### A. 养号互动
+### A. 合规互动
 
 ```bash
 # 搜索关键词，筛站内作品，点赞+评论（低频）
@@ -65,7 +65,7 @@ node scripts/cli.js --keyword "..." --comment "技术补充文案" --allow-brand
 - 单次上限：点赞≤5、评论≤3、收藏≤3、关注≤2；动作间隔 8-15 秒，条目间隔 40-90 秒。
 - 关键词池轮换，避免账号级模板指纹。文案库在 `scripts/comments.txt`，可自行扩充。
 - 每条评论发出前自动过 `compliance.js`：联系方式、绝对化词、品牌词、纯中文校验。
-- 命中验证码/操作频繁 → 立即熔断退出。
+- 命中验证码/操作频繁 → 立即保护性中止退出。
 - 每次动作写台账 `scripts/logs/interact-<date>.jsonl`，评论落地需验证出现在列表（不认假阳性）。
 - 头条改版后先跑 `node scripts/probe.js --keyword "..."` 重新侦察选择器，再改 `scripts/selectors.js`。
 
@@ -113,7 +113,7 @@ python3 scripts/make_infographic.py
 
 ## 三、发布节奏建议
 
-- 养号：每天早点赞 2-3 条、午评论 1 条、晚收藏关注各 1 条，关键词轮换，周日复盘。
+- 日常运营：每天早点赞 2-3 条、午评论 1 条、晚收藏关注各 1 条，关键词轮换，周日复盘。
 - 发文：每天 1 篇，晚 19:30 前后；每 4 篇最多 1 篇带品牌词，其余纯干货。
 - 复盘：每日看数据异常，每周从选题/标题/封面/配图/时段归因调整。
 

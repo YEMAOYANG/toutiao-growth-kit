@@ -13,7 +13,7 @@ const PROFILE_DIR = process.env.TOUTIAO_PROFILE || path.join(ROOT, '.profile');
 const LOG_DIR = path.join(ROOT, 'logs');
 const COMMENT_LIB = path.join(ROOT, 'data', 'comments.txt');
 
-// ---------- 限流配置（低频是头条养号的正确姿势，不是缺陷）----------
+// ---------- 限流配置（低频是头条日常运营的正确姿势，不是缺陷）----------
 const LIMITS = {
   maxLike: 5,
   maxComment: 3,
@@ -52,12 +52,8 @@ async function launch(headless = false) {
   ensureDirs();
   const ctx = await chromium.launchPersistentContext(PROFILE_DIR, {
     headless,
-    channel: 'chrome',           // 用系统 Chrome，指纹更接近真实用户
+    channel: 'chrome',
     viewport: { width: 1440, height: 900 },
-    args: ['--disable-blink-features=AutomationControlled'],
-  });
-  await ctx.addInitScript(() => {
-    Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
   });
   return ctx;
 }

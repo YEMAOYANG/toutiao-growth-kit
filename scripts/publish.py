@@ -239,7 +239,7 @@ async def run(article, commit, no_verify, log):
     async with async_playwright() as pw:
         ctx = await pw.chromium.launch_persistent_context(
             PROFILE, headless=False, channel="chrome",
-            args=["--start-maximized", "--disable-blink-features=AutomationControlled"],
+            args=["--start-maximized"],
             viewport={"width": 1440, "height": 950})
         page = await ctx.new_page()
         try:
