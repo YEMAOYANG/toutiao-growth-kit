@@ -1,6 +1,6 @@
 {
   "name": "toutiao-growth-kit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "今日头条内容运营全链路工具包：合规互动、图文发布、数据复盘、正文配图",
   "main": "scripts/cli.js",
   "scripts": {

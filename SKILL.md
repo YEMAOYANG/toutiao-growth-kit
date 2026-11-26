@@ -13,7 +13,7 @@ examples_en:
   - "Do a low-frequency engagement round on Toutiao for game-lag posts"
   - "Publish this article to Toutiao with illustrations and AI declaration"
   - "Fetch Toutiao post stats and generate today's review report"
-version: "1.0.0"
+version: "1.0.1"
 author: "toutiao-growth-kit contributors"
 agent_created: true
 allowed-tools: "Bash, Read, Write, Edit"
