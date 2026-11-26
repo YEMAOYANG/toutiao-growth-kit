@@ -10,10 +10,10 @@
 
 | 模块 | 能力 |
 |---|---|
-| `scripts/interact` | 按关键词搜站内作品，点赞/评论/收藏/关注，合规校验 + 风控熔断 + 落地验证 + 台账 |
-| `scripts/publish` | 发布包驱动的图文发布：标题/正文/声明/插图/封面自动填充，发布后核实落地 |
-| `scripts/review` | 抓后台作品数据，日报/周报分析，数据驱动调整建议 |
-| `scripts/infographic` | Pillow 生成中文信息图，配正文使用 |
+| `scripts/cli.js` / `engine.js` 等 | 按关键词搜站内作品，点赞/评论/收藏/关注，合规校验 + 风控熔断 + 落地验证 + 台账 |
+| `scripts/publish.py` | 发布包驱动的图文发布：标题/正文/声明/插图/封面自动填充，发布后核实落地 |
+| `scripts/fetch_stats.js` / `analyze.py` | 抓后台作品数据，日报/周报分析，数据驱动调整建议 |
+| `scripts/make_infographic.py` | Pillow 生成中文信息图，配正文使用 |
 
 ## 安装
 
@@ -35,15 +35,15 @@ pip install playwright Pillow
 ### 1. 登录（一次扫码，长期免登录）
 
 ```bash
-node scripts/interact/src/cli.js --login
-node scripts/interact/src/cli.js --check    # 确认 ready: true
+node scripts/cli.js --login
+node scripts/cli.js --check    # 确认 ready: true
 ```
 
 ### 2. 养号互动
 
 ```bash
-node scripts/interact/src/cli.js --keyword "游戏延迟高怎么办" --max 3 --do like,comment
-node scripts/interact/src/cli.js --keyword "打游戏460" --dry-run   # 演练
+node scripts/cli.js --keyword "游戏延迟高怎么办" --max 3 --do like,comment
+node scripts/cli.js --keyword "打游戏460" --dry-run   # 演练
 ```
 
 ### 3. 发布文章
@@ -51,22 +51,22 @@ node scripts/interact/src/cli.js --keyword "打游戏460" --dry-run   # 演练
 先复制 `templates/article-package.example.json` 改成自己的发布包，填好标题、正文、封面、声明：
 
 ```bash
-python3 scripts/publish/publish.py --article ./my-article.json           # 观察模式
-python3 scripts/publish/publish.py --article ./my-article.json --commit  # 真正发布
+python3 scripts/publish.py --article ./my-article.json           # 观察模式
+python3 scripts/publish.py --article ./my-article.json --commit  # 真正发布
 ```
 
 ### 4. 数据复盘
 
 ```bash
-node scripts/review/fetch_stats.js
-python3 scripts/review/analyze.py
-python3 scripts/review/analyze.py --weekly
+node scripts/fetch_stats.js
+python3 scripts/analyze.py
+python3 scripts/analyze.py --weekly
 ```
 
 ### 5. 生成正文配图
 
 ```bash
-python3 scripts/infographic/make_infographic.py
+python3 scripts/make_infographic.py
 ```
 
 非 macOS 系统需把脚本顶部 `FONT` / `FONT_L` 改成机器上已有的中文字体路径。
@@ -74,16 +74,16 @@ python3 scripts/infographic/make_infographic.py
 ## 配置
 
 - 品牌黑名单（互动时自动避开自己的品牌词）：复制 `config.json.example` 为 `config.json`，填入 `brand_denylist`。
-- 竞品/软文过滤名单：`scripts/interact/src/compliance.js` 的 `judgeTarget()`。
-- 评论文案库：`scripts/interact/data/comments.txt`。
-- profile 路径：默认 `scripts/interact/.profile/`，可用环境变量 `TOUTIAO_PROFILE` 覆盖。
+- 竞品/软文过滤名单：`scripts/compliance.js` 的 `judgeTarget()`。
+- 评论文案库：`scripts/comments.txt`。
+- profile 路径：默认 `scripts/.profile/`，可用环境变量 `TOUTIAO_PROFILE` 覆盖。
 
 ## 重要提示
 
 1. **profile 只用系统 Chrome 打开**。不要用 Python Playwright 自带 Chromium 打开同一 profile，会破坏 cookies。
 2. **发布后必核实**：脚本默认去作品管理页查标题存在，别只看"点了发布"。
 3. **新文章冷启动**：展现个位数正常，观察 24 小时再判断，分析器已内置保护。
-4. 头条改版后用 `node scripts/interact/src/probe.js --keyword "..."` 重新侦察选择器。
+4. 头条改版后用 `node scripts/probe.js --keyword "..."` 重新侦察选择器。
 
 详细文档见 `references/`：`dom-anchors.md`（选择器实测）、`pitfalls.md`（踩坑记录）、`compliance.md`（合规规则）、`content-playbook.md`（运营方法论）。
 

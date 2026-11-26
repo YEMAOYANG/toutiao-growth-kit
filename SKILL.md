@@ -35,15 +35,15 @@ allowed-tools: "Bash, Read, Write, Edit"
    ```
 2. **登录**：所有脚本共用一份持久化浏览器 profile。
    ```bash
-   node scripts/interact/src/cli.js --login
+   node scripts/cli.js --login
    ```
-   打开浏览器扫码登录。登录态保存在 `scripts/interact/.profile/`，后续免登录。
+   打开浏览器扫码登录。登录态保存在 `scripts/.profile/`，后续免登录。
    - 可用环境变量 `TOUTIAO_PROFILE` 指向别处。
    - **重要**：profile 必须始终用系统 Chrome（脚本已设 `channel: 'chrome'`）。不要用 Python Playwright 自带的 Chromium 打开同一 profile，会破坏 cookies 导致登录失效。
 
 3. **账号权益检查**：
    ```bash
-   node scripts/interact/src/cli.js --check
+   node scripts/cli.js --check
    ```
    若输出 `ready: false`，说明账号资料未完善或未绑手机号，需到今日头条 App 完成实名与账号类型选择后才能发布/互动。
 
@@ -53,21 +53,21 @@ allowed-tools: "Bash, Read, Write, Edit"
 
 ```bash
 # 搜索关键词，筛站内作品，点赞+评论（低频）
-node scripts/interact/src/cli.js --keyword "游戏延迟高怎么办" --max 3 --do like,comment
+node scripts/cli.js --keyword "游戏延迟高怎么办" --max 3 --do like,comment
 
 # 只看不点（演练）
-node scripts/interact/src/cli.js --keyword "打游戏460" --dry-run
+node scripts/cli.js --keyword "打游戏460" --dry-run
 
 # 指定评论文案 / 允许品牌词 / 无头模式
-node scripts/interact/src/cli.js --keyword "..." --comment "技术补充文案" --allow-brand --headless
+node scripts/cli.js --keyword "..." --comment "技术补充文案" --allow-brand --headless
 ```
 
 - 单次上限：点赞≤5、评论≤3、收藏≤3、关注≤2；动作间隔 8-15 秒，条目间隔 40-90 秒。
-- 关键词池轮换，避免账号级模板指纹。文案库在 `scripts/interact/data/comments.txt`，可自行扩充。
+- 关键词池轮换，避免账号级模板指纹。文案库在 `scripts/comments.txt`，可自行扩充。
 - 每条评论发出前自动过 `compliance.js`：联系方式、绝对化词、品牌词、纯中文校验。
 - 命中验证码/操作频繁 → 立即熔断退出。
-- 每次动作写台账 `scripts/interact/logs/interact-<date>.jsonl`，评论落地需验证出现在列表（不认假阳性）。
-- 头条改版后先跑 `node scripts/interact/src/probe.js --keyword "..."` 重新侦察选择器，再改 `src/selectors.js`。
+- 每次动作写台账 `scripts/logs/interact-<date>.jsonl`，评论落地需验证出现在列表（不认假阳性）。
+- 头条改版后先跑 `node scripts/probe.js --keyword "..."` 重新侦察选择器，再改 `scripts/selectors.js`。
 
 ### B. 图文发布
 
@@ -75,10 +75,10 @@ node scripts/interact/src/cli.js --keyword "..." --comment "技术补充文案" 
 
 ```bash
 # 先观察（不提交，检查填充是否正确）
-python3 scripts/publish/publish.py --article ./my-article.json
+python3 scripts/publish.py --article ./my-article.json
 
 # 确认无误后真正发布
-python3 scripts/publish/publish.py --article ./my-article.json --commit
+python3 scripts/publish.py --article ./my-article.json --commit
 ```
 
 - 脚本用发布包驱动：标题、正文、声明、插图、封面全从 JSON 读。
@@ -89,13 +89,13 @@ python3 scripts/publish/publish.py --article ./my-article.json --commit
 ### C. 数据复盘
 
 ```bash
-node scripts/review/fetch_stats.js          # 抓后台作品数据，写 reviews/stats.jsonl
-node scripts/review/fetch_stats.js --dry    # 只打印
-python3 scripts/review/analyze.py            # 出日报
-python3 scripts/review/analyze.py --weekly   # 出周报
+node scripts/fetch_stats.js          # 抓后台作品数据，写 reviews/stats.jsonl
+node scripts/fetch_stats.js --dry    # 只打印
+python3 scripts/analyze.py            # 出日报
+python3 scripts/analyze.py --weekly   # 出周报
 ```
 
-- 报告写入 `scripts/review/reviews/review-latest.md` / `review-weekly.md`。
+- 报告写入 `reviews/review-latest.md` / `review-weekly.md`。
 - 分析含新发布冷启动保护：展现<50 且无历史快照时只提示观察，不误判为失败。
 - 诊断维度：展现、点击率、点赞率、评论率、收藏率、数据停滞，逐篇给调整建议。
 - 建议配合定时任务每日/每周跑，用数据驱动选题调整。
@@ -103,7 +103,7 @@ python3 scripts/review/analyze.py --weekly   # 出周报
 ### D. 正文信息图
 
 ```bash
-python3 scripts/infographic/make_infographic.py
+python3 scripts/make_infographic.py
 ```
 
 - 生成深色卡片风格的信息图（排查步骤、类型对比、实测数据等），中文用系统字体排版，字形可靠。
@@ -122,5 +122,5 @@ python3 scripts/infographic/make_infographic.py
 ## 四、自定义
 
 - 品牌黑名单：在技能根目录 `config.json` 写 `{"brand_denylist": ["你的品牌词"]}`，评论会自动避开这些词。
-- 竞品/软文过滤名单：`scripts/interact/src/compliance.js` 的 `judgeTarget()`，按你的行业改。
-- 评论文案库：`scripts/interact/data/comments.txt`。
+- 竞品/软文过滤名单：`scripts/compliance.js` 的 `judgeTarget()`，按你的行业改。
+- 评论文案库：`scripts/comments.txt`。

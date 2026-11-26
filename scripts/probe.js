@@ -5,7 +5,7 @@
  * 页面侦察脚本 —— 头条改版后重新确认选择器用。
  * 输出：搜索页卡片结构、站内外分布、文章页互动按钮属性。
  *
- * 用法: node src/probe.js [--keyword "游戏延迟高怎么办"]
+ * 用法: node scripts/probe.js [--keyword "游戏延迟高怎么办"]
  */
 
 const E = require('./engine');

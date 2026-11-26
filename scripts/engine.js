@@ -6,7 +6,7 @@ const { chromium } = require('playwright');
 const { SEARCH, SITE_HOST_ALLOW, ARTICLE, SIGNALS } = require('./selectors');
 const { checkComment, judgeTarget } = require('./compliance');
 
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = __dirname;
 // 浏览器 profile：默认放在技能目录内，一处登录处处通用。
 // 可用环境变量 TOUTIAO_PROFILE 覆盖（例如复用已有 profile）。
 const PROFILE_DIR = process.env.TOUTIAO_PROFILE || path.join(ROOT, '.profile');

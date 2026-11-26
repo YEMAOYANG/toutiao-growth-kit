@@ -32,7 +32,7 @@ const BANNED_WORDS = [
 // 这里只保留通用词与占位符，确保公开分发不携带任何特定产品名。
 let BRAND_DENY = ['加速器', '万能神器', '必看绝了'];
 try {
-  const cfgPath = require('path').join(__dirname, '..', '..', '..', 'config.json');
+  const cfgPath = require('path').join(__dirname, '..', 'config.json');
   if (require('fs').existsSync(cfgPath)) {
     const cfg = JSON.parse(require('fs').readFileSync(cfgPath, 'utf8'));
     if (Array.isArray(cfg.brand_denylist) && cfg.brand_denylist.length) {

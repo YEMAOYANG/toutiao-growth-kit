@@ -6,7 +6,7 @@
    - 铁律：头条相关浏览器操作一律走 Node 引擎（`channel: 'chrome'`），Python 只做纯文本处理（`analyze.py`）或用 `channel='chrome'` 的系统 Chrome（`publish.py` 已设）。
 2. **headless 模式头条要求重新登录**。抓取数据、发布都用有头模式（`headless: false`）。
 3. **强杀脚本会损坏会话**。发布脚本收尾用 `.stop` 信号文件让它自己退出，不要强杀进程。
-4. profile 路径统一：`scripts/interact/.profile/`，或环境变量 `TOUTIAO_PROFILE`。所有脚本共用一份，一处登录处处通用。
+4. profile 路径统一：`scripts/.profile/`，或环境变量 `TOUTIAO_PROFILE`。所有脚本共用一份，一处登录处处通用。
 
 ## 发布
 

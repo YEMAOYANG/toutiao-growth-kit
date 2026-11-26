@@ -30,21 +30,21 @@ function usage() {
 头条养号交互工具（toutiao-growth-kit）
 
 用法:
-  node scripts/interact/src/cli.js --keyword "<关键词>" [选项]
+  node scripts/cli.js --keyword "<关键词>" [选项]
 
 选项:
   --keyword <kw>     搜索关键词（必填）
   --max <n>          本次最多处理几条作品（默认 3）
   --do <list>        动作，逗号分隔: like,comment,collect,follow（默认 like,comment）
-  --comment <text>   指定评论文案，多候选用 | 分隔；不填则从 data/comments.txt 随机取
+  --comment <text>   指定评论文案，多候选用 | 分隔；不填则从 comments.txt 随机取
   --dry-run          只打印计划，不实际点击
   --headless         无头模式（默认有头）
   --allow-brand      允许评论出现品牌词（默认禁止）
   --max-scan <n>     搜索页最多扫描条数（默认 40）
 
 子命令:
-  node scripts/interact/src/cli.js --check     检查登录态与账号权益
-  node scripts/interact/src/cli.js --login     打开浏览器扫码登录（持久化）
+  node scripts/cli.js --check     检查登录态与账号权益
+  node scripts/cli.js --login     打开浏览器扫码登录（持久化）
 `);
 }
 

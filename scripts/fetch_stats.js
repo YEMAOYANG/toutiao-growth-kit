@@ -9,7 +9,7 @@
  */
 const fs = require('fs');
 const path = require('path');
-const E = require('../interact/src/engine');
+const E = require('./engine');
 
 const BASE = __dirname;
 const LEDGER = path.join(BASE, 'reviews', 'stats.jsonl');
