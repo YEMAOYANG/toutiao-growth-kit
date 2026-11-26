@@ -1,0 +1,18 @@
+{
+  "name": "toutiao-growth-kit",
+  "version": "1.0.0",
+  "description": "今日头条内容运营全链路工具包：养号互动、图文发布、数据复盘、正文配图",
+  "main": "scripts/interact/src/cli.js",
+  "scripts": {
+    "login": "node scripts/interact/src/cli.js --login",
+    "check": "node scripts/interact/src/cli.js --check",
+    "interact": "node scripts/interact/src/cli.js",
+    "probe": "node scripts/interact/src/probe.js",
+    "stats": "node scripts/review/fetch_stats.js",
+    "analyze": "python3 scripts/review/analyze.py"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0"
+  },
+  "license": "MIT"
+}

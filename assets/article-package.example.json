@@ -1,0 +1,21 @@
+{
+  "platform": "toutiao",
+  "title": "打游戏卡顿就换宽带？钱花了故障还在",
+  "content": "<p>第一段正文。可以是纯文本，也可以是带 <p> 标签的 HTML。</p><p>第二段正文。</p>",
+  "cover": "./assets/cover-example.jpg",
+  "tags": ["游戏延迟", "网络优化", "掉线排查"],
+  "illustrations": [
+    {
+      "after": "第一段正文里的独特短语",
+      "path": "./assets/infographic-example.jpg",
+      "caption": "图注文字（可选）"
+    }
+  ],
+  "compliance": {
+    "declarations": {
+      "引用AI": true,
+      "头条首发": false
+    },
+    "note": "declarations 里的项会在发布时自动勾选。引用AI 是平台合规硬要求，用了 AI 辅助就该勾。"
+  }
+}

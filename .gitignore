@@ -1,0 +1,19 @@
+# 浏览器登录态（含 cookies，绝不提交）
+.profile/
+*.profile/
+config.json
+
+# 台账与日志
+scripts/interact/logs/
+scripts/review/reviews/
+*.jsonl
+
+# 生成的图片与缓存
+*.pyc
+__pycache__/
+node_modules/
+.DS_Store
+
+# 发布脚本停止信号
+.stop
+STOP
